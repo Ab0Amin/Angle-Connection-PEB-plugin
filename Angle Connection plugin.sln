@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Angle Connection plugin", "Angle Connection plugin\Angle Connection plugin.csproj", "{51CEB05C-3A28-469A-8BE7-3CDA15E9AF0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51CEB05C-3A28-469A-8BE7-3CDA15E9AF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51CEB05C-3A28-469A-8BE7-3CDA15E9AF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51CEB05C-3A28-469A-8BE7-3CDA15E9AF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51CEB05C-3A28-469A-8BE7-3CDA15E9AF0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3E30088C-2194-463B-82FF-49ED2992DC49}
+	EndGlobalSection
+EndGlobal
