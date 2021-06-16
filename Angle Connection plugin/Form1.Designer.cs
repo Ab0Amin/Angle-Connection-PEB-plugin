@@ -80,8 +80,6 @@ namespace Angle_Connection_plugin
             this.tx_boltengde1_Y_1 = new System.Windows.Forms.TextBox();
             this.tx_Slot_y_1 = new System.Windows.Forms.TextBox();
             this.tx_Slot_x_1 = new System.Windows.Forms.TextBox();
-            this.tx_NoOfNuts_1 = new System.Windows.Forms.TextBox();
-            this.tx_NOofWasher_1 = new System.Windows.Forms.TextBox();
             this.tx_boltTolerence_1 = new System.Windows.Forms.TextBox();
             this.tx_boltStandard_1 = new System.Windows.Forms.TextBox();
             this.tx_boltSize_1 = new System.Windows.Forms.TextBox();
@@ -94,7 +92,7 @@ namespace Angle_Connection_plugin
             this.label9 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.cm_workshop_2 = new System.Windows.Forms.ComboBox();
+            this.cb_workshop_2 = new System.Windows.Forms.ComboBox();
             this.label22 = new System.Windows.Forms.Label();
             this.cb_solted_2 = new System.Windows.Forms.ComboBox();
             this.cb_weldedBolt_2 = new System.Windows.Forms.ComboBox();
@@ -108,8 +106,6 @@ namespace Angle_Connection_plugin
             this.tx_boltedge2_y_2 = new System.Windows.Forms.TextBox();
             this.tx_slotY_2 = new System.Windows.Forms.TextBox();
             this.tx_slotX_2 = new System.Windows.Forms.TextBox();
-            this.tx_NoOfNutes_2 = new System.Windows.Forms.TextBox();
-            this.tx_NoOfWasher_2 = new System.Windows.Forms.TextBox();
             this.tx_bolttolerance_2 = new System.Windows.Forms.TextBox();
             this.tx_boltStandard_2 = new System.Windows.Forms.TextBox();
             this.tx_boltSize_2 = new System.Windows.Forms.TextBox();
@@ -135,6 +131,14 @@ namespace Angle_Connection_plugin
             this.label26 = new System.Windows.Forms.Label();
             this.tx_stiffWeldSizeAbove_Y = new System.Windows.Forms.TextBox();
             this.tx_stiffWeldSizeBelow_Y = new System.Windows.Forms.TextBox();
+            this.tx_poybeamWeldToSec = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tx_poybeamWeldToMain = new System.Windows.Forms.TextBox();
+            this.label28 = new System.Windows.Forms.Label();
+            this.cm_washerNo_1 = new System.Windows.Forms.ComboBox();
+            this.cm_nutNo_1 = new System.Windows.Forms.ComboBox();
+            this.cm_nutNo_2 = new System.Windows.Forms.ComboBox();
+            this.cm_washerNo_2 = new System.Windows.Forms.ComboBox();
             this.kk.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -515,7 +519,11 @@ namespace Angle_Connection_plugin
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.tx_poybeamWeldToMain);
+            this.tabPage3.Controls.Add(this.label28);
             this.tabPage3.Controls.Add(this.cb_workshop_1);
+            this.tabPage3.Controls.Add(this.cm_nutNo_1);
+            this.tabPage3.Controls.Add(this.cm_washerNo_1);
             this.tabPage3.Controls.Add(this.cb_sloted_1);
             this.tabPage3.Controls.Add(this.cb_weldedBolt_1);
             this.tabPage3.Controls.Add(this.tx_boltedge_x_1);
@@ -528,8 +536,6 @@ namespace Angle_Connection_plugin
             this.tabPage3.Controls.Add(this.tx_boltengde1_Y_1);
             this.tabPage3.Controls.Add(this.tx_Slot_y_1);
             this.tabPage3.Controls.Add(this.tx_Slot_x_1);
-            this.tabPage3.Controls.Add(this.tx_NoOfNuts_1);
-            this.tabPage3.Controls.Add(this.tx_NOofWasher_1);
             this.tabPage3.Controls.Add(this.tx_boltTolerence_1);
             this.tabPage3.Controls.Add(this.tx_boltStandard_1);
             this.tabPage3.Controls.Add(this.tx_boltSize_1);
@@ -576,9 +582,8 @@ namespace Angle_Connection_plugin
             // 
             this.cb_weldedBolt_1.FormattingEnabled = true;
             this.cb_weldedBolt_1.Items.AddRange(new object[] {
-            "none",
-            "welded to column",
-            "welded to beam"});
+            "bolted",
+            "welded "});
             this.cb_weldedBolt_1.Location = new System.Drawing.Point(20, 126);
             this.cb_weldedBolt_1.Name = "cb_weldedBolt_1";
             this.cb_weldedBolt_1.Size = new System.Drawing.Size(121, 21);
@@ -656,6 +661,7 @@ namespace Angle_Connection_plugin
             this.tx_Slot_y_1.Name = "tx_Slot_y_1";
             this.tx_Slot_y_1.Size = new System.Drawing.Size(46, 20);
             this.tx_Slot_y_1.TabIndex = 2;
+            this.tx_Slot_y_1.Text = "20";
             // 
             // tx_Slot_x_1
             // 
@@ -663,22 +669,7 @@ namespace Angle_Connection_plugin
             this.tx_Slot_x_1.Name = "tx_Slot_x_1";
             this.tx_Slot_x_1.Size = new System.Drawing.Size(46, 20);
             this.tx_Slot_x_1.TabIndex = 2;
-            // 
-            // tx_NoOfNuts_1
-            // 
-            this.tx_NoOfNuts_1.Location = new System.Drawing.Point(432, 150);
-            this.tx_NoOfNuts_1.Name = "tx_NoOfNuts_1";
-            this.tx_NoOfNuts_1.Size = new System.Drawing.Size(100, 20);
-            this.tx_NoOfNuts_1.TabIndex = 2;
-            this.tx_NoOfNuts_1.Text = "2";
-            // 
-            // tx_NOofWasher_1
-            // 
-            this.tx_NOofWasher_1.Location = new System.Drawing.Point(249, 147);
-            this.tx_NOofWasher_1.Name = "tx_NOofWasher_1";
-            this.tx_NOofWasher_1.Size = new System.Drawing.Size(100, 20);
-            this.tx_NOofWasher_1.TabIndex = 2;
-            this.tx_NOofWasher_1.Text = "2";
+            this.tx_Slot_x_1.Text = "20";
             // 
             // tx_boltTolerence_1
             // 
@@ -779,7 +770,9 @@ namespace Angle_Connection_plugin
             // 
             // tabPage5
             // 
-            this.tabPage5.Controls.Add(this.cm_workshop_2);
+            this.tabPage5.Controls.Add(this.cm_washerNo_2);
+            this.tabPage5.Controls.Add(this.cm_nutNo_2);
+            this.tabPage5.Controls.Add(this.cb_workshop_2);
             this.tabPage5.Controls.Add(this.label22);
             this.tabPage5.Controls.Add(this.cb_solted_2);
             this.tabPage5.Controls.Add(this.cb_weldedBolt_2);
@@ -792,12 +785,12 @@ namespace Angle_Connection_plugin
             this.tabPage5.Controls.Add(this.tx_boltengde1_x_2);
             this.tabPage5.Controls.Add(this.tx_boltedge2_y_2);
             this.tabPage5.Controls.Add(this.tx_slotY_2);
+            this.tabPage5.Controls.Add(this.tx_poybeamWeldToSec);
             this.tabPage5.Controls.Add(this.tx_slotX_2);
-            this.tabPage5.Controls.Add(this.tx_NoOfNutes_2);
-            this.tabPage5.Controls.Add(this.tx_NoOfWasher_2);
             this.tabPage5.Controls.Add(this.tx_bolttolerance_2);
             this.tabPage5.Controls.Add(this.tx_boltStandard_2);
             this.tabPage5.Controls.Add(this.tx_boltSize_2);
+            this.tabPage5.Controls.Add(this.label27);
             this.tabPage5.Controls.Add(this.label15);
             this.tabPage5.Controls.Add(this.label16);
             this.tabPage5.Controls.Add(this.label17);
@@ -812,16 +805,16 @@ namespace Angle_Connection_plugin
             this.tabPage5.Text = "bolt2";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
-            // cm_workshop_2
+            // cb_workshop_2
             // 
-            this.cm_workshop_2.FormattingEnabled = true;
-            this.cm_workshop_2.Items.AddRange(new object[] {
+            this.cb_workshop_2.FormattingEnabled = true;
+            this.cb_workshop_2.Items.AddRange(new object[] {
             "site",
             "workshop"});
-            this.cm_workshop_2.Location = new System.Drawing.Point(389, 213);
-            this.cm_workshop_2.Name = "cm_workshop_2";
-            this.cm_workshop_2.Size = new System.Drawing.Size(81, 21);
-            this.cm_workshop_2.TabIndex = 29;
+            this.cb_workshop_2.Location = new System.Drawing.Point(389, 213);
+            this.cb_workshop_2.Name = "cb_workshop_2";
+            this.cb_workshop_2.Size = new System.Drawing.Size(81, 21);
+            this.cb_workshop_2.TabIndex = 29;
             // 
             // label22
             // 
@@ -848,9 +841,8 @@ namespace Angle_Connection_plugin
             // 
             this.cb_weldedBolt_2.FormattingEnabled = true;
             this.cb_weldedBolt_2.Items.AddRange(new object[] {
-            "none",
-            "welded to column",
-            "welded to beam"});
+            "bolted",
+            "welded"});
             this.cb_weldedBolt_2.Location = new System.Drawing.Point(20, 122);
             this.cb_weldedBolt_2.Name = "cb_weldedBolt_2";
             this.cb_weldedBolt_2.Size = new System.Drawing.Size(121, 21);
@@ -926,6 +918,7 @@ namespace Angle_Connection_plugin
             this.tx_slotY_2.Name = "tx_slotY_2";
             this.tx_slotY_2.Size = new System.Drawing.Size(46, 20);
             this.tx_slotY_2.TabIndex = 25;
+            this.tx_slotY_2.Text = "20";
             // 
             // tx_slotX_2
             // 
@@ -933,22 +926,7 @@ namespace Angle_Connection_plugin
             this.tx_slotX_2.Name = "tx_slotX_2";
             this.tx_slotX_2.Size = new System.Drawing.Size(46, 20);
             this.tx_slotX_2.TabIndex = 16;
-            // 
-            // tx_NoOfNutes_2
-            // 
-            this.tx_NoOfNutes_2.Location = new System.Drawing.Point(432, 146);
-            this.tx_NoOfNutes_2.Name = "tx_NoOfNutes_2";
-            this.tx_NoOfNutes_2.Size = new System.Drawing.Size(100, 20);
-            this.tx_NoOfNutes_2.TabIndex = 15;
-            this.tx_NoOfNutes_2.Text = "2";
-            // 
-            // tx_NoOfWasher_2
-            // 
-            this.tx_NoOfWasher_2.Location = new System.Drawing.Point(249, 143);
-            this.tx_NoOfWasher_2.Name = "tx_NoOfWasher_2";
-            this.tx_NoOfWasher_2.Size = new System.Drawing.Size(100, 20);
-            this.tx_NoOfWasher_2.TabIndex = 14;
-            this.tx_NoOfWasher_2.Text = "2";
+            this.tx_slotX_2.Text = "20";
             // 
             // tx_bolttolerance_2
             // 
@@ -1175,6 +1153,84 @@ namespace Angle_Connection_plugin
             this.tx_stiffWeldSizeBelow_Y.TabIndex = 5;
             this.tx_stiffWeldSizeBelow_Y.Text = "10";
             // 
+            // tx_poybeamWeldToSec
+            // 
+            this.tx_poybeamWeldToSec.Location = new System.Drawing.Point(95, 176);
+            this.tx_poybeamWeldToSec.Name = "tx_poybeamWeldToSec";
+            this.tx_poybeamWeldToSec.Size = new System.Drawing.Size(46, 20);
+            this.tx_poybeamWeldToSec.TabIndex = 16;
+            this.tx_poybeamWeldToSec.Text = "6";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(39, 180);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(50, 13);
+            this.label27.TabIndex = 9;
+            this.label27.Text = "weld size";
+            // 
+            // tx_poybeamWeldToMain
+            // 
+            this.tx_poybeamWeldToMain.Location = new System.Drawing.Point(93, 180);
+            this.tx_poybeamWeldToMain.Name = "tx_poybeamWeldToMain";
+            this.tx_poybeamWeldToMain.Size = new System.Drawing.Size(46, 20);
+            this.tx_poybeamWeldToMain.TabIndex = 18;
+            this.tx_poybeamWeldToMain.Text = "6";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(37, 184);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(50, 13);
+            this.label28.TabIndex = 17;
+            this.label28.Text = "weld size";
+            // 
+            // cm_washerNo_1
+            // 
+            this.cm_washerNo_1.FormattingEnabled = true;
+            this.cm_washerNo_1.Items.AddRange(new object[] {
+            "1 washer",
+            "2 washers"});
+            this.cm_washerNo_1.Location = new System.Drawing.Point(226, 146);
+            this.cm_washerNo_1.Name = "cm_washerNo_1";
+            this.cm_washerNo_1.Size = new System.Drawing.Size(81, 21);
+            this.cm_washerNo_1.TabIndex = 3;
+            // 
+            // cm_nutNo_1
+            // 
+            this.cm_nutNo_1.FormattingEnabled = true;
+            this.cm_nutNo_1.Items.AddRange(new object[] {
+            "1 nut",
+            "2 nuts"});
+            this.cm_nutNo_1.Location = new System.Drawing.Point(389, 146);
+            this.cm_nutNo_1.Name = "cm_nutNo_1";
+            this.cm_nutNo_1.Size = new System.Drawing.Size(81, 21);
+            this.cm_nutNo_1.TabIndex = 3;
+            // 
+            // cm_nutNo_2
+            // 
+            this.cm_nutNo_2.FormattingEnabled = true;
+            this.cm_nutNo_2.Items.AddRange(new object[] {
+            "1 nut",
+            "2 nuts"});
+            this.cm_nutNo_2.Location = new System.Drawing.Point(389, 150);
+            this.cm_nutNo_2.Name = "cm_nutNo_2";
+            this.cm_nutNo_2.Size = new System.Drawing.Size(81, 21);
+            this.cm_nutNo_2.TabIndex = 30;
+            // 
+            // cm_washerNo_2
+            // 
+            this.cm_washerNo_2.FormattingEnabled = true;
+            this.cm_washerNo_2.Items.AddRange(new object[] {
+            "1 washer",
+            "2 washers"});
+            this.cm_washerNo_2.Location = new System.Drawing.Point(241, 142);
+            this.cm_washerNo_2.Name = "cm_washerNo_2";
+            this.cm_washerNo_2.Size = new System.Drawing.Size(81, 21);
+            this.cm_washerNo_2.TabIndex = 30;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1247,8 +1303,6 @@ namespace Angle_Connection_plugin
         private System.Windows.Forms.TextBox tx_boltengde1_Y_1;
         private System.Windows.Forms.TextBox tx_Slot_y_1;
         private System.Windows.Forms.TextBox tx_Slot_x_1;
-        private System.Windows.Forms.TextBox tx_NoOfNuts_1;
-        private System.Windows.Forms.TextBox tx_NOofWasher_1;
         private System.Windows.Forms.TextBox tx_boltTolerence_1;
         private System.Windows.Forms.TextBox tx_boltStandard_1;
         private System.Windows.Forms.TextBox tx_boltSize_1;
@@ -1283,8 +1337,6 @@ namespace Angle_Connection_plugin
         private System.Windows.Forms.TextBox tx_boltedge2_y_2;
         private System.Windows.Forms.TextBox tx_slotY_2;
         private System.Windows.Forms.TextBox tx_slotX_2;
-        private System.Windows.Forms.TextBox tx_NoOfNutes_2;
-        private System.Windows.Forms.TextBox tx_NoOfWasher_2;
         private System.Windows.Forms.TextBox tx_bolttolerance_2;
         private System.Windows.Forms.TextBox tx_boltStandard_2;
         private System.Windows.Forms.TextBox tx_boltSize_2;
@@ -1297,7 +1349,7 @@ namespace Angle_Connection_plugin
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.ComboBox cb_workshop_1;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.ComboBox cm_workshop_2;
+        private System.Windows.Forms.ComboBox cb_workshop_2;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox6;
@@ -1313,6 +1365,14 @@ namespace Angle_Connection_plugin
         private System.Windows.Forms.TextBox tx_stiffWeldSizeAbove_Y;
         private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox tx_poybeamWeldToMain;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox tx_poybeamWeldToSec;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ComboBox cm_nutNo_1;
+        private System.Windows.Forms.ComboBox cm_washerNo_1;
+        private System.Windows.Forms.ComboBox cm_washerNo_2;
+        private System.Windows.Forms.ComboBox cm_nutNo_2;
     }
 }
 

@@ -25,6 +25,18 @@ namespace Angle_Connection_plugin
         {
             InitializeComponent();
             cb_location.SelectedIndex = 0;
+            cb_weldedBolt_1.SelectedIndex = 0;
+            cb_weldedBolt_2.SelectedIndex = 0;
+            cb_sloted_1.SelectedIndex = 0;
+            cb_solted_2.SelectedIndex = 0;
+            cb_workshop_1.SelectedIndex = 0;
+            cb_workshop_2.SelectedIndex = 1;
+        
+            cm_washerNo_1.SelectedIndex = 0;
+            cm_washerNo_2.SelectedIndex = 0;
+            cm_nutNo_1.SelectedIndex = 0;
+            cm_nutNo_2.SelectedIndex = 0;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,6 +71,9 @@ namespace Angle_Connection_plugin
             int polyBeam_startNO = int.Parse(tx_polybeamStartNo.Text);
             double polyBeam_chanfer_x = double.Parse(tx_polybeamChanferX.Text);
             double polyBeam_chanfer_y = double.Parse(tx_polybeamChanferY.Text);
+
+            double polybeam_weldWithMain = double.Parse(tx_poybeamWeldToMain.Text);
+            double polybeam_weldWithSec = double.Parse(tx_poybeamWeldToSec.Text);
 
             //stiffner
             double stiffner_thik =double.Parse( tx_stiffThik.Text);
@@ -108,7 +123,30 @@ namespace Angle_Connection_plugin
             int NO_ofBolts_X_sec = int.Parse(tx_bolt_X_No_2.Text);
             int NO_ofBolts_Y_sec = int.Parse(tx_boltNo_Y_2.Text);
 
+            BoltArray.BoltTypeEnum boltType_1 = BoltGroup.BoltTypeEnum.BOLT_TYPE_SITE;
+            BoltArray.BoltTypeEnum boltType_2 = BoltGroup.BoltTypeEnum.BOLT_TYPE_SITE;
 
+
+
+            bool slotMainPart_1 = false;
+            bool slotSecPart_1 = false;
+            bool washer2_1 = false;
+            bool nut2_1 = false;
+
+
+            double slotX_1 = double.Parse(tx_Slot_x_1.Text);
+            double slotY_1 = double.Parse(tx_Slot_y_1.Text);
+          
+            bool slotMainPart_2 = false;
+            bool slotSecPart_2 = false;
+            bool washer2_2 = false;
+            bool nut2_2 = false;
+
+
+            double slotX_2 = double.Parse(tx_slotX_2.Text);
+            double slotY_2 = double.Parse(tx_slotY_2.Text);
+
+           
             // pick 2 parts main and secandy part
             mainPart = new Picker().PickObject(Picker.PickObjectEnum.PICK_ONE_PART) as Part;
             secendaryPart = new Picker().PickObject(Picker.PickObjectEnum.PICK_ONE_PART) as Part;
@@ -276,7 +314,7 @@ namespace Angle_Connection_plugin
                     }
                     else if (cb_polybeamChanfer.SelectedIndex == 1)
                     {
-                        polyBeam_chanfetType.Type = Chamfer.ChamferTypeEnum.CHAMFER_ARC;
+                        polyBeam_chanfetType.Type = Chamfer.ChamferTypeEnum.CHAMFER_ROUNDING;
 
                     }
                     else
@@ -290,11 +328,89 @@ namespace Angle_Connection_plugin
 
                     PolyBeam plate = insertPolyPlate(plateWidth, platethick, platePoint1,plateMidPoint, platePoint3,polyBeam_material,polyBeam_name,polyBeam_perfix,polyBeam_startNO, polyBeam_chanfetType);
 
-                    BoltArray boltWithMain = InsertBolt(platePoint1, plateMidPoint, mainPart, plate, dx_Boltedge_main, boltSize_main,
-              tolerance_main, boltStandard_main, NO_ofBolts_X_main, NO_ofBolts_Y_main, X_spacing_main, Y_spacing_main);
 
-                    BoltArray boltWithSec = InsertBolt(platePoint3, plateMidPoint, secendaryPart, plate, dx_Boltedge_sec, boltSize_sec,
-            tolerance_sec, boltStandard_sec, NO_ofBolts_X_sec, NO_ofBolts_Y_sec, X_spacing_sec, Y_spacing_sec);
+                    //cb_location.SelectedIndex = 0;
+                    //cb_weldedBolt_1.SelectedIndex = 0;
+                    //cb_weldedBolt_2.SelectedIndex = 0;
+                    //cb_sloted_1.SelectedIndex = 0;
+                    //cb_solted_2.SelectedIndex = 0;
+                    //cb_workshop_1.SelectedIndex = 0;
+                    //cb_workshop_2.SelectedIndex = 1;
+
+                    // bolts
+
+                    if (cb_sloted_1.SelectedIndex == 1 )
+                    {
+                        slotMainPart_1 = true;
+                    }
+                    else if (cb_sloted_1.SelectedIndex == 2)
+                    {
+                        slotSecPart_1 = true;
+                    }
+
+                    if (cb_solted_2.SelectedIndex == 2)
+                    {
+                        slotMainPart_2 = true;
+                    }
+                    else if (cb_solted_2.SelectedIndex == 1)
+                    {
+                        slotSecPart_2 = true;
+                    }
+
+                    if (cm_washerNo_1.SelectedIndex == 1)
+                    {
+                        washer2_1 = true;
+                    }
+                    if (cm_washerNo_2.SelectedIndex == 1)
+                    {
+                        washer2_2 = true;
+                    }
+                    if (cm_nutNo_1.SelectedIndex == 1)
+                    {
+                        nut2_1 = true;
+                    }
+                    if (cm_nutNo_1.SelectedIndex == 1)
+                    {
+                        nut2_2 = true;
+                    }
+
+                    if (cb_workshop_1.SelectedIndex == 1)
+                    {
+                        boltType_1 = BoltGroup.BoltTypeEnum.BOLT_TYPE_WORKSHOP;
+                    }
+
+                    if (cb_workshop_2.SelectedIndex == 1)
+                    {
+                        boltType_2 = BoltGroup.BoltTypeEnum.BOLT_TYPE_WORKSHOP;
+                    }
+
+                    if (cb_weldedBolt_1.SelectedIndex == 0)
+                    {
+                       
+                        BoltArray boltWithMain = InsertBolt(platePoint1, plateMidPoint, mainPart, plate, dx_Boltedge_main, boltSize_main,
+tolerance_main, boltStandard_main, NO_ofBolts_X_main, NO_ofBolts_Y_main, X_spacing_main, Y_spacing_main
+, boltType_1, slotMainPart_1, slotSecPart_1, slotX_1, slotY_1, washer2_1, nut2_1
+);
+                    }
+                    else
+                    {
+                        insert_weld_allaround(mainPart, plate, polybeam_weldWithMain);
+                    }
+
+
+                    if (cb_weldedBolt_2.SelectedIndex == 0)
+                    {
+
+                        BoltArray boltWithSec = InsertBolt(platePoint3, plateMidPoint, secendaryPart, plate, dx_Boltedge_sec, boltSize_sec,
+            tolerance_sec, boltStandard_sec, NO_ofBolts_X_sec, NO_ofBolts_Y_sec, X_spacing_sec, Y_spacing_sec
+              , boltType_2, slotMainPart_2, slotSecPart_2, slotX_2, slotY_2, washer2_2, nut2_2
+            );
+                    }
+                    else
+                    {
+                        insert_weld_allaround(secendaryPart, plate, polybeam_weldWithMain);
+                    }
+
 
 
 
@@ -342,6 +458,7 @@ namespace Angle_Connection_plugin
 
                     Operation.MoveObject(stiffner, new Vector(0, 0,stiff_shift));
 
+                    // copy stiffners
                     if (NO_ofStiffner>1)
                     {
 
@@ -369,6 +486,12 @@ namespace Angle_Connection_plugin
                             }
                         }
                     }
+
+
+
+                    // compoboxes
+                
+                    
                 }
                 #endregion
 
@@ -381,7 +504,7 @@ namespace Angle_Connection_plugin
 
 
 
-          //  myModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlan);
+            myModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlan);
             myModel.CommitChanges();
         }
 
@@ -409,37 +532,51 @@ namespace Angle_Connection_plugin
         }
 
         private BoltArray InsertBolt(Point platePoint1,Point plateMidPoint,Part mainPart, Part plate, double dx, double boltSize,
-            double tolerance, string boltStandard, int no_bolt_x, int no_bolt_y ,string spacing_x,string spacing_y)
+            double tolerance, string boltStandard, int no_bolt_x, int no_bolt_y ,string spacing_x,string spacing_y,
+              BoltArray.BoltTypeEnum boltType ,bool sloyInMainPart , bool sloyInSecnPart, double slot_X ,double slot_y ,bool Washer2 , bool nut2
+            )
         {
-            BoltArray boltArrayWithMain = new BoltArray();
-            boltArrayWithMain.FirstPosition = plateMidPoint;
-            boltArrayWithMain.SecondPosition = platePoint1;
-            boltArrayWithMain.PartToBeBolted = plate;
-            boltArrayWithMain.PartToBoltTo = mainPart;
+          
+            BoltArray boltArray = new BoltArray();
+            boltArray.FirstPosition = plateMidPoint;
+            boltArray.SecondPosition = platePoint1;
+            boltArray.PartToBeBolted = plate;
+            boltArray.PartToBoltTo = mainPart;
 
             string[] spacing_X_array = spacing_x.Split(' ');
             string[] spacing_Y_array = spacing_y.Split(' ');
             for (int i = 0; i < no_bolt_x-1; i++)
             {
-                boltArrayWithMain.AddBoltDistX(double.Parse(spacing_X_array[i]));
+                boltArray.AddBoltDistX(double.Parse(spacing_X_array[i]));
 
             }
             for (int i = 0; i < no_bolt_y-1; i++)
             {
-                boltArrayWithMain.AddBoltDistY(double.Parse(spacing_Y_array[i]));
+                boltArray.AddBoltDistY(double.Parse(spacing_Y_array[i]));
 
             }
-            boltArrayWithMain.StartPointOffset.Dx = dx;
+            boltArray.StartPointOffset.Dx = dx;
 
-            boltArrayWithMain.BoltSize = boltSize;
-            boltArrayWithMain.Tolerance = tolerance;
-            boltArrayWithMain.BoltStandard = boltStandard;
-            boltArrayWithMain.BoltType = BoltGroup.BoltTypeEnum.BOLT_TYPE_WORKSHOP;
-            boltArrayWithMain.Position.Rotation = Position.RotationEnum.TOP;
+            boltArray.BoltSize = boltSize;
+            boltArray.Tolerance = tolerance;
+            boltArray.BoltStandard = boltStandard;
+            boltArray.Position.Rotation = Position.RotationEnum.TOP;
+            
+            boltArray.BoltType = boltType;
+            boltArray.Hole1 = sloyInMainPart;
+            boltArray.Hole2 = sloyInSecnPart;
+            boltArray.SlottedHoleX = slot_X;
+            boltArray.SlottedHoleY = slot_y;
+            boltArray.Washer2 = Washer2;
+            boltArray.Nut2 = nut2;
 
 
-            boltArrayWithMain.Insert();
-            return boltArrayWithMain;
+            boltArray.Washer1 = true;
+            boltArray.Nut1 = true;
+            boltArray.HoleType = BoltGroup.BoltHoleTypeEnum.HOLE_TYPE_SLOTTED;
+
+            boltArray.Insert();
+            return boltArray;
         }
 
       
@@ -462,7 +599,28 @@ namespace Angle_Connection_plugin
             return weld;
         }
 
+        public Weld insert_weld_allaround(Part Main_part, Part Secandary_part, double below)
+        {
+            Weld weld = new Weld();
+            weld.MainObject = Main_part;
+            weld.SecondaryObject = Secandary_part;
+            weld.TypeAbove = BaseWeld.WeldTypeEnum.WELD_TYPE_NONE;
+            weld.SizeAbove = 0;
+            weld.SizeBelow = below;
+            weld.TypeBelow = BaseWeld.WeldTypeEnum.WELD_TYPE_FILLET;
+
+            weld.ShopWeld = true;
+            weld.AroundWeld = true;
+            weld.Insert();
+            return weld;
+        }
+
         private void textBox25_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
         {
 
         }
