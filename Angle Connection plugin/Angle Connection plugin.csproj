@@ -52,8 +52,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Program Files\Tekla Structures\2017i\nt\bin\plugins\Tekla.Structures.Model.dll</HintPath>
     </Reference>
+    <Reference Include="Tekla.Structures.Plugins, Version=2017.1.0.0, Culture=neutral, PublicKeyToken=2f04dbe497b71114, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Tekla Structures\2017i\nt\bin\plugins\Tekla.Structures.Plugins.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Angle_Connection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
