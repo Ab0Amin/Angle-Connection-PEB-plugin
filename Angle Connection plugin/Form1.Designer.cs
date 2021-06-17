@@ -139,6 +139,30 @@ namespace Angle_Connection_plugin
             this.cm_nutNo_1 = new System.Windows.Forms.ComboBox();
             this.cm_nutNo_2 = new System.Windows.Forms.ComboBox();
             this.cm_washerNo_2 = new System.Windows.Forms.ComboBox();
+            this.cb_type_above_1 = new System.Windows.Forms.ComboBox();
+            this.cb_type_below_1 = new System.Windows.Forms.ComboBox();
+            this.cb_type_above_2 = new System.Windows.Forms.ComboBox();
+            this.cb_type_below_2 = new System.Windows.Forms.ComboBox();
+            this.tx_angle_above_1 = new System.Windows.Forms.TextBox();
+            this.tx_root_above_1 = new System.Windows.Forms.TextBox();
+            this.tx_throat_above_1 = new System.Windows.Forms.TextBox();
+            this.cb_above_contor_1 = new System.Windows.Forms.ComboBox();
+            this.tx_weld_comment_1 = new System.Windows.Forms.TextBox();
+            this.cb_weld_stieOrShop_1 = new System.Windows.Forms.ComboBox();
+            this.tx_angle_below_1 = new System.Windows.Forms.TextBox();
+            this.tx_root_below_1 = new System.Windows.Forms.TextBox();
+            this.tx_throat_below_1 = new System.Windows.Forms.TextBox();
+            this.cb_below_contor_1 = new System.Windows.Forms.ComboBox();
+            this.tx_angle_above_2 = new System.Windows.Forms.TextBox();
+            this.tx_angle_below_2 = new System.Windows.Forms.TextBox();
+            this.tx_root_above_2 = new System.Windows.Forms.TextBox();
+            this.tx_root_below_2 = new System.Windows.Forms.TextBox();
+            this.tx_throat_above_2 = new System.Windows.Forms.TextBox();
+            this.tx_throat_below_2 = new System.Windows.Forms.TextBox();
+            this.tx_weld_comment_2 = new System.Windows.Forms.TextBox();
+            this.cb_above_contor_2 = new System.Windows.Forms.ComboBox();
+            this.cb_below_contor_2 = new System.Windows.Forms.ComboBox();
+            this.cb_weld_stieOrShop_2 = new System.Windows.Forms.ComboBox();
             this.kk.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -1018,9 +1042,33 @@ namespace Angle_Connection_plugin
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.cb_type_below_2);
+            this.tabPage4.Controls.Add(this.cb_type_above_2);
+            this.tabPage4.Controls.Add(this.cb_type_below_1);
+            this.tabPage4.Controls.Add(this.cb_weld_stieOrShop_2);
+            this.tabPage4.Controls.Add(this.cb_weld_stieOrShop_1);
+            this.tabPage4.Controls.Add(this.cb_below_contor_2);
+            this.tabPage4.Controls.Add(this.cb_below_contor_1);
+            this.tabPage4.Controls.Add(this.cb_above_contor_2);
+            this.tabPage4.Controls.Add(this.cb_above_contor_1);
+            this.tabPage4.Controls.Add(this.cb_type_above_1);
             this.tabPage4.Controls.Add(this.tx_stiffWeldSizeBelow_Y);
             this.tabPage4.Controls.Add(this.tx_stiffWeldSizeBelow_X);
             this.tabPage4.Controls.Add(this.tx_stiffWeldSizeAbove_Y);
+            this.tabPage4.Controls.Add(this.tx_weld_comment_2);
+            this.tabPage4.Controls.Add(this.tx_weld_comment_1);
+            this.tabPage4.Controls.Add(this.tx_throat_below_2);
+            this.tabPage4.Controls.Add(this.tx_throat_below_1);
+            this.tabPage4.Controls.Add(this.tx_throat_above_2);
+            this.tabPage4.Controls.Add(this.tx_throat_above_1);
+            this.tabPage4.Controls.Add(this.tx_root_below_2);
+            this.tabPage4.Controls.Add(this.tx_root_below_1);
+            this.tabPage4.Controls.Add(this.tx_root_above_2);
+            this.tabPage4.Controls.Add(this.tx_root_above_1);
+            this.tabPage4.Controls.Add(this.tx_angle_below_2);
+            this.tabPage4.Controls.Add(this.tx_angle_above_2);
+            this.tabPage4.Controls.Add(this.tx_angle_below_1);
+            this.tabPage4.Controls.Add(this.tx_angle_above_1);
             this.tabPage4.Controls.Add(this.tx_stiffWeldSizeAbove_X);
             this.tabPage4.Controls.Add(this.label26);
             this.tabPage4.Controls.Add(this.label25);
@@ -1089,7 +1137,7 @@ namespace Angle_Connection_plugin
             // 
             this.tx_stiffWeldSizeBelow_X.Location = new System.Drawing.Point(100, 63);
             this.tx_stiffWeldSizeBelow_X.Name = "tx_stiffWeldSizeBelow_X";
-            this.tx_stiffWeldSizeBelow_X.Size = new System.Drawing.Size(100, 20);
+            this.tx_stiffWeldSizeBelow_X.Size = new System.Drawing.Size(28, 20);
             this.tx_stiffWeldSizeBelow_X.TabIndex = 5;
             this.tx_stiffWeldSizeBelow_X.Text = "6";
             // 
@@ -1097,7 +1145,7 @@ namespace Angle_Connection_plugin
             // 
             this.tx_stiffWeldSizeAbove_X.Location = new System.Drawing.Point(100, 31);
             this.tx_stiffWeldSizeAbove_X.Name = "tx_stiffWeldSizeAbove_X";
-            this.tx_stiffWeldSizeAbove_X.Size = new System.Drawing.Size(100, 20);
+            this.tx_stiffWeldSizeAbove_X.Size = new System.Drawing.Size(28, 20);
             this.tx_stiffWeldSizeAbove_X.TabIndex = 6;
             this.tx_stiffWeldSizeAbove_X.Text = "6";
             // 
@@ -1141,7 +1189,7 @@ namespace Angle_Connection_plugin
             // 
             this.tx_stiffWeldSizeAbove_Y.Location = new System.Drawing.Point(101, 141);
             this.tx_stiffWeldSizeAbove_Y.Name = "tx_stiffWeldSizeAbove_Y";
-            this.tx_stiffWeldSizeAbove_Y.Size = new System.Drawing.Size(100, 20);
+            this.tx_stiffWeldSizeAbove_Y.Size = new System.Drawing.Size(27, 20);
             this.tx_stiffWeldSizeAbove_Y.TabIndex = 6;
             this.tx_stiffWeldSizeAbove_Y.Text = "10";
             // 
@@ -1149,7 +1197,7 @@ namespace Angle_Connection_plugin
             // 
             this.tx_stiffWeldSizeBelow_Y.Location = new System.Drawing.Point(101, 173);
             this.tx_stiffWeldSizeBelow_Y.Name = "tx_stiffWeldSizeBelow_Y";
-            this.tx_stiffWeldSizeBelow_Y.Size = new System.Drawing.Size(100, 20);
+            this.tx_stiffWeldSizeBelow_Y.Size = new System.Drawing.Size(27, 20);
             this.tx_stiffWeldSizeBelow_Y.TabIndex = 5;
             this.tx_stiffWeldSizeBelow_Y.Text = "10";
             // 
@@ -1230,6 +1278,244 @@ namespace Angle_Connection_plugin
             this.cm_washerNo_2.Name = "cm_washerNo_2";
             this.cm_washerNo_2.Size = new System.Drawing.Size(81, 21);
             this.cm_washerNo_2.TabIndex = 30;
+            // 
+            // cb_type_above_1
+            // 
+            this.cb_type_above_1.FormattingEnabled = true;
+            this.cb_type_above_1.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove",
+            "none"});
+            this.cb_type_above_1.Location = new System.Drawing.Point(151, 29);
+            this.cb_type_above_1.Name = "cb_type_above_1";
+            this.cb_type_above_1.Size = new System.Drawing.Size(50, 21);
+            this.cb_type_above_1.TabIndex = 7;
+            // 
+            // cb_type_below_1
+            // 
+            this.cb_type_below_1.FormattingEnabled = true;
+            this.cb_type_below_1.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove",
+            "none"});
+            this.cb_type_below_1.Location = new System.Drawing.Point(151, 62);
+            this.cb_type_below_1.Name = "cb_type_below_1";
+            this.cb_type_below_1.Size = new System.Drawing.Size(50, 21);
+            this.cb_type_below_1.TabIndex = 7;
+            // 
+            // cb_type_above_2
+            // 
+            this.cb_type_above_2.FormattingEnabled = true;
+            this.cb_type_above_2.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove",
+            "none"});
+            this.cb_type_above_2.Location = new System.Drawing.Point(151, 136);
+            this.cb_type_above_2.Name = "cb_type_above_2";
+            this.cb_type_above_2.Size = new System.Drawing.Size(50, 21);
+            this.cb_type_above_2.TabIndex = 7;
+            // 
+            // cb_type_below_2
+            // 
+            this.cb_type_below_2.FormattingEnabled = true;
+            this.cb_type_below_2.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove",
+            "none"});
+            this.cb_type_below_2.Location = new System.Drawing.Point(151, 168);
+            this.cb_type_below_2.Name = "cb_type_below_2";
+            this.cb_type_below_2.Size = new System.Drawing.Size(50, 21);
+            this.cb_type_below_2.TabIndex = 7;
+            // 
+            // tx_angle_above_1
+            // 
+            this.tx_angle_above_1.Location = new System.Drawing.Point(225, 27);
+            this.tx_angle_above_1.Name = "tx_angle_above_1";
+            this.tx_angle_above_1.Size = new System.Drawing.Size(28, 20);
+            this.tx_angle_above_1.TabIndex = 6;
+            this.tx_angle_above_1.Text = "6";
+            // 
+            // tx_root_above_1
+            // 
+            this.tx_root_above_1.Location = new System.Drawing.Point(259, 27);
+            this.tx_root_above_1.Name = "tx_root_above_1";
+            this.tx_root_above_1.Size = new System.Drawing.Size(28, 20);
+            this.tx_root_above_1.TabIndex = 6;
+            this.tx_root_above_1.Text = "6";
+            // 
+            // tx_throat_above_1
+            // 
+            this.tx_throat_above_1.Location = new System.Drawing.Point(293, 28);
+            this.tx_throat_above_1.Name = "tx_throat_above_1";
+            this.tx_throat_above_1.Size = new System.Drawing.Size(28, 20);
+            this.tx_throat_above_1.TabIndex = 6;
+            this.tx_throat_above_1.Text = "6";
+            // 
+            // cb_above_contor_1
+            // 
+            this.cb_above_contor_1.FormattingEnabled = true;
+            this.cb_above_contor_1.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove"});
+            this.cb_above_contor_1.Location = new System.Drawing.Point(343, 28);
+            this.cb_above_contor_1.Name = "cb_above_contor_1";
+            this.cb_above_contor_1.Size = new System.Drawing.Size(50, 21);
+            this.cb_above_contor_1.TabIndex = 7;
+            // 
+            // tx_weld_comment_1
+            // 
+            this.tx_weld_comment_1.Location = new System.Drawing.Point(411, 29);
+            this.tx_weld_comment_1.Name = "tx_weld_comment_1";
+            this.tx_weld_comment_1.Size = new System.Drawing.Size(48, 20);
+            this.tx_weld_comment_1.TabIndex = 6;
+            this.tx_weld_comment_1.Text = "6";
+            // 
+            // cb_weld_stieOrShop_1
+            // 
+            this.cb_weld_stieOrShop_1.FormattingEnabled = true;
+            this.cb_weld_stieOrShop_1.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove",
+            "none"});
+            this.cb_weld_stieOrShop_1.Location = new System.Drawing.Point(409, 58);
+            this.cb_weld_stieOrShop_1.Name = "cb_weld_stieOrShop_1";
+            this.cb_weld_stieOrShop_1.Size = new System.Drawing.Size(50, 21);
+            this.cb_weld_stieOrShop_1.TabIndex = 7;
+            // 
+            // tx_angle_below_1
+            // 
+            this.tx_angle_below_1.Location = new System.Drawing.Point(225, 62);
+            this.tx_angle_below_1.Name = "tx_angle_below_1";
+            this.tx_angle_below_1.Size = new System.Drawing.Size(28, 20);
+            this.tx_angle_below_1.TabIndex = 6;
+            this.tx_angle_below_1.Text = "6";
+            // 
+            // tx_root_below_1
+            // 
+            this.tx_root_below_1.Location = new System.Drawing.Point(259, 62);
+            this.tx_root_below_1.Name = "tx_root_below_1";
+            this.tx_root_below_1.Size = new System.Drawing.Size(28, 20);
+            this.tx_root_below_1.TabIndex = 6;
+            this.tx_root_below_1.Text = "6";
+            // 
+            // tx_throat_below_1
+            // 
+            this.tx_throat_below_1.Location = new System.Drawing.Point(293, 63);
+            this.tx_throat_below_1.Name = "tx_throat_below_1";
+            this.tx_throat_below_1.Size = new System.Drawing.Size(28, 20);
+            this.tx_throat_below_1.TabIndex = 6;
+            this.tx_throat_below_1.Text = "6";
+            // 
+            // cb_below_contor_1
+            // 
+            this.cb_below_contor_1.FormattingEnabled = true;
+            this.cb_below_contor_1.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove"});
+            this.cb_below_contor_1.Location = new System.Drawing.Point(343, 63);
+            this.cb_below_contor_1.Name = "cb_below_contor_1";
+            this.cb_below_contor_1.Size = new System.Drawing.Size(50, 21);
+            this.cb_below_contor_1.TabIndex = 7;
+            // 
+            // tx_angle_above_2
+            // 
+            this.tx_angle_above_2.Location = new System.Drawing.Point(225, 133);
+            this.tx_angle_above_2.Name = "tx_angle_above_2";
+            this.tx_angle_above_2.Size = new System.Drawing.Size(28, 20);
+            this.tx_angle_above_2.TabIndex = 6;
+            this.tx_angle_above_2.Text = "6";
+            // 
+            // tx_angle_below_2
+            // 
+            this.tx_angle_below_2.Location = new System.Drawing.Point(225, 168);
+            this.tx_angle_below_2.Name = "tx_angle_below_2";
+            this.tx_angle_below_2.Size = new System.Drawing.Size(28, 20);
+            this.tx_angle_below_2.TabIndex = 6;
+            this.tx_angle_below_2.Text = "6";
+            // 
+            // tx_root_above_2
+            // 
+            this.tx_root_above_2.Location = new System.Drawing.Point(259, 133);
+            this.tx_root_above_2.Name = "tx_root_above_2";
+            this.tx_root_above_2.Size = new System.Drawing.Size(28, 20);
+            this.tx_root_above_2.TabIndex = 6;
+            this.tx_root_above_2.Text = "6";
+            // 
+            // tx_root_below_2
+            // 
+            this.tx_root_below_2.Location = new System.Drawing.Point(259, 168);
+            this.tx_root_below_2.Name = "tx_root_below_2";
+            this.tx_root_below_2.Size = new System.Drawing.Size(28, 20);
+            this.tx_root_below_2.TabIndex = 6;
+            this.tx_root_below_2.Text = "6";
+            // 
+            // tx_throat_above_2
+            // 
+            this.tx_throat_above_2.Location = new System.Drawing.Point(293, 134);
+            this.tx_throat_above_2.Name = "tx_throat_above_2";
+            this.tx_throat_above_2.Size = new System.Drawing.Size(28, 20);
+            this.tx_throat_above_2.TabIndex = 6;
+            this.tx_throat_above_2.Text = "6";
+            // 
+            // tx_throat_below_2
+            // 
+            this.tx_throat_below_2.Location = new System.Drawing.Point(293, 169);
+            this.tx_throat_below_2.Name = "tx_throat_below_2";
+            this.tx_throat_below_2.Size = new System.Drawing.Size(28, 20);
+            this.tx_throat_below_2.TabIndex = 6;
+            this.tx_throat_below_2.Text = "6";
+            // 
+            // tx_weld_comment_2
+            // 
+            this.tx_weld_comment_2.Location = new System.Drawing.Point(411, 135);
+            this.tx_weld_comment_2.Name = "tx_weld_comment_2";
+            this.tx_weld_comment_2.Size = new System.Drawing.Size(48, 20);
+            this.tx_weld_comment_2.TabIndex = 6;
+            this.tx_weld_comment_2.Text = "6";
+            // 
+            // cb_above_contor_2
+            // 
+            this.cb_above_contor_2.FormattingEnabled = true;
+            this.cb_above_contor_2.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove"});
+            this.cb_above_contor_2.Location = new System.Drawing.Point(343, 134);
+            this.cb_above_contor_2.Name = "cb_above_contor_2";
+            this.cb_above_contor_2.Size = new System.Drawing.Size(50, 21);
+            this.cb_above_contor_2.TabIndex = 7;
+            // 
+            // cb_below_contor_2
+            // 
+            this.cb_below_contor_2.FormattingEnabled = true;
+            this.cb_below_contor_2.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove"});
+            this.cb_below_contor_2.Location = new System.Drawing.Point(343, 169);
+            this.cb_below_contor_2.Name = "cb_below_contor_2";
+            this.cb_below_contor_2.Size = new System.Drawing.Size(50, 21);
+            this.cb_below_contor_2.TabIndex = 7;
+            // 
+            // cb_weld_stieOrShop_2
+            // 
+            this.cb_weld_stieOrShop_2.FormattingEnabled = true;
+            this.cb_weld_stieOrShop_2.Items.AddRange(new object[] {
+            "fillet",
+            "groove",
+            "fillet+groove",
+            "none"});
+            this.cb_weld_stieOrShop_2.Location = new System.Drawing.Point(409, 164);
+            this.cb_weld_stieOrShop_2.Name = "cb_weld_stieOrShop_2";
+            this.cb_weld_stieOrShop_2.Size = new System.Drawing.Size(50, 21);
+            this.cb_weld_stieOrShop_2.TabIndex = 7;
             // 
             // Form1
             // 
@@ -1373,6 +1659,30 @@ namespace Angle_Connection_plugin
         private System.Windows.Forms.ComboBox cm_washerNo_1;
         private System.Windows.Forms.ComboBox cm_washerNo_2;
         private System.Windows.Forms.ComboBox cm_nutNo_2;
+        private System.Windows.Forms.ComboBox cb_type_below_2;
+        private System.Windows.Forms.ComboBox cb_type_above_2;
+        private System.Windows.Forms.ComboBox cb_type_below_1;
+        private System.Windows.Forms.ComboBox cb_weld_stieOrShop_2;
+        private System.Windows.Forms.ComboBox cb_weld_stieOrShop_1;
+        private System.Windows.Forms.ComboBox cb_below_contor_2;
+        private System.Windows.Forms.ComboBox cb_below_contor_1;
+        private System.Windows.Forms.ComboBox cb_above_contor_2;
+        private System.Windows.Forms.ComboBox cb_above_contor_1;
+        private System.Windows.Forms.ComboBox cb_type_above_1;
+        private System.Windows.Forms.TextBox tx_weld_comment_2;
+        private System.Windows.Forms.TextBox tx_weld_comment_1;
+        private System.Windows.Forms.TextBox tx_throat_below_2;
+        private System.Windows.Forms.TextBox tx_throat_below_1;
+        private System.Windows.Forms.TextBox tx_throat_above_2;
+        private System.Windows.Forms.TextBox tx_throat_above_1;
+        private System.Windows.Forms.TextBox tx_root_below_2;
+        private System.Windows.Forms.TextBox tx_root_below_1;
+        private System.Windows.Forms.TextBox tx_root_above_2;
+        private System.Windows.Forms.TextBox tx_root_above_1;
+        private System.Windows.Forms.TextBox tx_angle_below_2;
+        private System.Windows.Forms.TextBox tx_angle_above_2;
+        private System.Windows.Forms.TextBox tx_angle_below_1;
+        private System.Windows.Forms.TextBox tx_angle_above_1;
     }
 }
 

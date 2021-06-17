@@ -92,14 +92,52 @@ namespace Angle_Connection_plugin
             double stiff_chanfer_x = double.Parse(tx_stffnerChanferX.Text);
             double stiff_chanfer_y = double.Parse(tx_stffnerChanferY.Text);
 
+           
+
+            int NO_ofStiffner = int.Parse(tx_no_ofStiffners.Text);
+            double Spacing_stiffners = double.Parse(tx_spacingStiffners.Text);
+            double stiff_shift = double.Parse(tx_stiffnerShift.Text);
+
+
+            //stiffner welds 
+
             double stiff_weldAbove_X = double.Parse(tx_stiffWeldSizeAbove_X.Text);
             double stiff_weldBelow_X = double.Parse(tx_stiffWeldSizeBelow_X.Text);
             double stiff_weldAbove_Y = double.Parse(tx_stiffWeldSizeAbove_Y.Text);
             double stiff_weldBelow_Y = double.Parse(tx_stiffWeldSizeBelow_Y.Text);
 
-            int NO_ofStiffner = int.Parse(tx_no_ofStiffners.Text);
-            double Spacing_stiffners = double.Parse(tx_spacingStiffners.Text);
-            double stiff_shift = double.Parse(tx_stiffnerShift.Text);
+            int weld_above_1_type = cb_type_above_1.SelectedIndex;
+            int weld_above_2_type = cb_type_above_2.SelectedIndex;
+            int weld_below_1_type = cb_type_below_1.SelectedIndex;
+            int weld_below_2_type = cb_type_below_2.SelectedIndex;
+
+            double weld_angle_above_1 = double.Parse(tx_angle_above_1.Text);
+            double weld_angle_above_2 = double.Parse(tx_angle_above_2.Text);
+            double weld_angle_below_1 = double.Parse(tx_angle_below_1.Text);
+            double weld_angle_below_2 = double.Parse(tx_angle_below_2.Text);
+
+
+            double weld_root_above_1 = double.Parse(tx_root_above_1.Text);
+            double weld_root_above_2 = double.Parse(tx_root_above_2.Text);
+            double weld_root_below_1 = double.Parse(tx_root_below_1.Text);
+            double weld_root_below_2 = double.Parse(tx_root_below_2.Text);
+
+
+            double weld_throat_above_1 = double.Parse(tx_throat_above_1.Text);
+            double weld_throat_above_2 = double.Parse(tx_throat_above_2.Text);
+            double weld_throat_below_1 = double.Parse(tx_throat_below_1.Text);
+            double weld_throat_below_2 = double.Parse(tx_throat_below_2.Text);
+
+            int weld_contour_above_1 = cb_above_contor_1.SelectedIndex;
+            int weld_contour_above_2 = cb_above_contor_2.SelectedIndex;
+            int weld_contour_below_1 = cb_below_contor_1.SelectedIndex;
+            int weld_contour_below_2 = cb_below_contor_2.SelectedIndex;
+
+            int weld_shopOrSite_1 = cb_weld_stieOrShop_1.SelectedIndex;
+            int weld_shopOrSite_2 = cb_weld_stieOrShop_2.SelectedIndex;
+
+            string weld_comment_1 = tx_weld_comment_1.Text;
+            string weld_comment_2 = tx_weld_comment_2.Text;
 
             // bolts 
 
@@ -329,13 +367,7 @@ namespace Angle_Connection_plugin
                     PolyBeam plate = insertPolyPlate(plateWidth, platethick, platePoint1,plateMidPoint, platePoint3,polyBeam_material,polyBeam_name,polyBeam_perfix,polyBeam_startNO, polyBeam_chanfetType);
 
 
-                    //cb_location.SelectedIndex = 0;
-                    //cb_weldedBolt_1.SelectedIndex = 0;
-                    //cb_weldedBolt_2.SelectedIndex = 0;
-                    //cb_sloted_1.SelectedIndex = 0;
-                    //cb_solted_2.SelectedIndex = 0;
-                    //cb_workshop_1.SelectedIndex = 0;
-                    //cb_workshop_2.SelectedIndex = 1;
+                  
 
                     // bolts
 
@@ -451,8 +483,25 @@ tolerance_main, boltStandard_main, NO_ofBolts_X_main, NO_ofBolts_Y_main, X_spaci
                     stiffner.Insert();
 
                     //weld stiff to polybem
-                    insert_weld(plate, stiffner, stiff_weldAbove_X, stiff_weldBelow_X, new Vector(-1, 0, 0));
-                    insert_weld(plate, stiffner, stiff_weldAbove_Y, stiff_weldBelow_Y, new Vector(0, -1, 0));
+                    //insert_weld(plate, stiffner, stiff_weldAbove_X, stiff_weldBelow_X, new Vector(-1, 0, 0));
+                    //insert_weld(plate, stiffner, stiff_weldAbove_Y, stiff_weldBelow_Y, new Vector(0, -1, 0));
+
+                    Weld(plate, stiffner, stiff_weldAbove_X, stiff_weldBelow_X, weld_above_1_type, weld_below_1_type, weld_angle_above_1, weld_angle_below_1, weld_root_above_1, weld_root_below_1,
+                        weld_throat_above_1, weld_throat_below_1, weld_shopOrSite_1, "-x", weld_comment_1, weld_contour_above_1, weld_contour_below_1);
+
+
+                    groovebetween2points(stiffner, stiffner_thik, stiffnerPoint0, stiffnerPoint4, new t3d.Vector(0, 0, 1), new t3d.Vector(1, 0, 0), getmidpoint(stiffnerPoint0, stiffnerPoint4),
+                        stiff_weldAbove_X, stiff_weldBelow_X, weld_above_1_type, weld_below_1_type, weld_angle_above_1, weld_angle_below_1, 5);
+
+                  
+
+
+                    Weld(plate, stiffner, stiff_weldAbove_Y, stiff_weldBelow_Y, weld_above_2_type, weld_below_2_type, weld_angle_above_2, weld_angle_below_2, weld_root_above_2, weld_angle_below_2,
+                       weld_throat_above_2, weld_throat_below_2, weld_shopOrSite_2, "-y", weld_comment_2, weld_contour_above_2, weld_contour_below_2);
+
+                    groovebetween2points(stiffner, stiffner_thik, stiffnerPoint0, stiffnerPoint1, new t3d.Vector(0, 0, 1), new t3d.Vector(0, 1, 0), getmidpoint(stiffnerPoint0, stiffnerPoint1),
+                       stiff_weldAbove_Y, stiff_weldBelow_Y, weld_above_2_type, weld_below_2_type, weld_angle_above_2, weld_angle_below_2, 5);
+
 
                     // move stiffner
 
@@ -507,6 +556,191 @@ tolerance_main, boltStandard_main, NO_ofBolts_X_main, NO_ofBolts_Y_main, X_spaci
             myModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlan);
             myModel.CommitChanges();
         }
+        private void createBevel(Part cuttedpart, t3d.Point p1, t3d.Point p2, t3d.Point p3, string profile)
+        {
+            ContourPlate contourPlate = new ContourPlate();
+            contourPlate.Class = BooleanPart.BooleanOperativeClassName;
+            contourPlate.Profile.ProfileString = profile;
+            contourPlate.Contour.AddContourPoint(new ContourPoint(p1, new Chamfer()));
+            contourPlate.Contour.AddContourPoint(new ContourPoint(p2, new Chamfer()));
+            contourPlate.Contour.AddContourPoint(new ContourPoint(p3, new Chamfer()));
+            contourPlate.Name = "PLUGIN";
+            ///  if 
+            contourPlate.Insert();
+            {
+                BooleanPart booleanPart = new BooleanPart();
+                booleanPart.Father = cuttedpart;
+                booleanPart.SetOperativePart(contourPlate);
+                try
+                {
+                    booleanPart.Insert();
+                }
+              catch
+                {
+                }
+                contourPlate.Delete();
+            }
+        }
+        public t3d.Point getmidpoint(t3d.Point p1, t3d.Point p2)
+        {
+            double dis = t3d.Distance.PointToPoint(p1, p2);
+            t3d.Vector vec = new t3d.Vector(p2 - p1); vec.Normalize();
+            return p1 + 0.5 * dis * vec;
+        }
+
+       
+        private void groovebetween2points(Part cutpart, double cutthk, t3d.Point p1, t3d.Point p2, t3d.Vector normalvec, t3d.Vector insidevec , t3d.Point stiffmidpoint, double wsize, double wsize2, int wtype, int wtype2, double wangle, double wangle2, double extension)
+        {
+            normalvec.Normalize();
+            insidevec.Normalize();
+            t3d.GeometricPlane faceplane = new t3d.GeometricPlane(p1, new t3d.Vector(p2 - p1), normalvec);
+           // t3d.Vector insidevec = new t3d.Vector(stiffmidpoint - t3d.Projection.PointToPlane(stiffmidpoint, faceplane));
+            insidevec.Normalize();
+
+            t3d.Point mymidpoint = getmidpoint(p1, p2);
+
+            t3d.Point gr1p1 = mymidpoint + cutthk / 2 * normalvec;
+            t3d.Point gr1p2 = gr1p1 - wsize * normalvec;
+            t3d.Point gr1p3 = gr1p1 + wsize * Math.Tan(wangle * Math.PI / 180) * insidevec;
+
+            t3d.Point gr2p1 = mymidpoint - cutthk / 2 * normalvec;
+            t3d.Point gr2p2 = gr2p1 + wsize2 * normalvec;
+            t3d.Point gr2p3 = gr2p1 + wsize2 * Math.Tan(wangle2 * Math.PI / 180) * insidevec;
+
+            string grooveprofie = "PL" + (t3d.Distance.PointToPoint(p1, p2) + 2 * extension);
+            if (wtype == 1 || wtype == 2)
+            {
+                createBevel(cutpart, gr1p1, gr1p2, gr1p3, grooveprofie);
+            }
+            if (wtype2 == 1 || wtype2 == 2)
+            {
+                createBevel(cutpart, gr2p1, gr2p2, gr2p3, grooveprofie);
+            }
+        }
+
+
+        public Weld Weld(Part main, Part sec, double Size, double Size2, int type, int type2, double angle, double angle2, double root, double root2, double throat, double throat2, int ShoporSite, string WeldDirection, string Comment, int topgrind, int topgrind2)
+        {
+            Weld weld = new Weld();
+            weld.MainObject = main;
+            weld.SecondaryObject = sec;
+            weld.SizeAbove = Size;
+            weld.SizeBelow = Size2;
+            weld.AngleAbove = angle;
+            weld.AngleBelow = angle2;
+            weld.RootFaceAbove = root;
+            weld.RootFaceBelow = root2;
+            weld.EffectiveThroatAbove = throat;
+            weld.EffectiveThroatBelow = throat2;
+            weld.AroundWeld = false;
+            weld.ReferenceText = Comment;
+            if (ShoporSite == 0)
+            {
+                weld.ShopWeld = true;
+            }
+            else
+            {
+                weld.ShopWeld = false;
+            }
+            switch (WeldDirection)
+            {
+                case "+x": weld.Position = Tekla.Structures.Model.Weld.WeldPositionEnum.WELD_POSITION_PLUS_X; break;
+                case "-x": weld.Position = Tekla.Structures.Model.Weld.WeldPositionEnum.WELD_POSITION_MINUS_X; ; break;
+                case "+y": weld.Position = Tekla.Structures.Model.Weld.WeldPositionEnum.WELD_POSITION_PLUS_Y; break;
+                case "-y": weld.Position = Tekla.Structures.Model.Weld.WeldPositionEnum.WELD_POSITION_MINUS_Y; break;
+                case "+z": weld.Position = Tekla.Structures.Model.Weld.WeldPositionEnum.WELD_POSITION_PLUS_Z; break;
+                case "-z": weld.Position = Tekla.Structures.Model.Weld.WeldPositionEnum.WELD_POSITION_MINUS_Z; break;
+            }
+            if (topgrind == 0)
+            {
+                weld.ContourAbove = BaseWeld.WeldContourEnum.WELD_CONTOUR_NONE;
+            }
+            else if (topgrind == 1)
+            {
+                weld.ContourAbove = BaseWeld.WeldContourEnum.WELD_CONTOUR_FLUSH;
+            }
+            else if (topgrind == 2)
+            {
+                weld.ContourAbove = BaseWeld.WeldContourEnum.WELD_CONTOUR_CONVEX;
+            }
+            else
+            {
+                weld.ContourAbove = BaseWeld.WeldContourEnum.WELD_CONTOUR_CONCAVE;
+            }
+
+            if (topgrind2 == 0)
+            {
+                weld.ContourBelow = BaseWeld.WeldContourEnum.WELD_CONTOUR_NONE;
+            }
+            else if (topgrind2 == 1)
+            {
+                weld.ContourBelow = BaseWeld.WeldContourEnum.WELD_CONTOUR_FLUSH;
+            }
+            else if (topgrind2 == 2)
+            {
+                weld.ContourBelow = BaseWeld.WeldContourEnum.WELD_CONTOUR_CONVEX;
+            }
+            else
+            {
+                weld.ContourBelow = BaseWeld.WeldContourEnum.WELD_CONTOUR_CONCAVE;
+            }
+
+            if (type != 0)
+            {
+                weld.AngleAbove = angle;
+            }
+            if (type2 != 0)
+            {
+                weld.AngleBelow = angle2;
+            }
+
+            /*(0 = fillet , 1 = grove)*/
+            if (type == 1)
+            {
+                weld.TypeAbove = BaseWeld.WeldTypeEnum.WELD_TYPE_BEVEL_GROOVE_SINGLE_BEVEL_BUTT;
+            }
+            else if (type == 2)
+            {
+                weld.TypeAbove = BaseWeld.WeldTypeEnum.WELD_TYPE_PARTIAL_PENETRATION_SINGLE_BEVEL_BUTT_PLUS_FILLET;
+            }
+            else if (type == 3)
+            {
+                weld.TypeAbove = BaseWeld.WeldTypeEnum.WELD_TYPE_NONE;
+            }
+            else
+            {
+                weld.TypeAbove = BaseWeld.WeldTypeEnum.WELD_TYPE_FILLET;
+            }
+
+            if (type2 == 1)
+            {
+                weld.TypeBelow = BaseWeld.WeldTypeEnum.WELD_TYPE_BEVEL_GROOVE_SINGLE_BEVEL_BUTT;
+            }
+            else if (type2 == 2)
+            {
+                weld.TypeBelow = BaseWeld.WeldTypeEnum.WELD_TYPE_PARTIAL_PENETRATION_SINGLE_BEVEL_BUTT_PLUS_FILLET;
+            }
+            else if (type2 == 3)
+            {
+                weld.TypeBelow = BaseWeld.WeldTypeEnum.WELD_TYPE_NONE;
+            }
+            else
+            {
+                weld.TypeBelow = BaseWeld.WeldTypeEnum.WELD_TYPE_FILLET;
+            }
+
+            try
+            {
+                weld.Insert();
+            }
+            catch
+            {
+            }
+
+
+            return weld;
+        }
+
 
         private PolyBeam insertPolyPlate(double plateWidth, double platethick, Point platePoint1, Point plateMidPoint, Point platePoint3,string material,string name ,string perfix ,int startNO,Chamfer c)
         {
