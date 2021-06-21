@@ -497,7 +497,7 @@ namespace Angle_Connection_plugin
             this.tx_stiffnerL2.Name = "tx_stiffnerL2";
             this.tx_stiffnerL2.Size = new System.Drawing.Size(48, 20);
             this.tx_stiffnerL2.TabIndex = 0;
-            this.tx_stiffnerL2.Text = "120";
+            this.tx_stiffnerL2.Text = "5";
             // 
             // tx_stiffnerL1
             // 
@@ -505,7 +505,7 @@ namespace Angle_Connection_plugin
             this.tx_stiffnerL1.Name = "tx_stiffnerL1";
             this.tx_stiffnerL1.Size = new System.Drawing.Size(48, 20);
             this.tx_stiffnerL1.TabIndex = 0;
-            this.tx_stiffnerL1.Text = "120";
+            this.tx_stiffnerL1.Text = "5";
             // 
             // tx_stiffStartNoo
             // 

@@ -45,30 +45,10 @@ namespace Angle_Connection_plugin
 
         private void button1_Click(object sender, EventArgs e)
         {
+         
 
-            #region parameter
-            double sum_1 = 0;
-            string[] spacing_X_array_1 = tx_boltsXSpacing_1.Text.Split(' ');
-            for (int i = 0; i < int.Parse(tx_NoOfXBolts_1.Text) - 1; i++)
-            {
-                sum_1 = sum_1 + double.Parse(spacing_X_array_1[i]);
-            }
-            sum_1 = sum_1 + double.Parse(tx_boltedge2_x_1.Text) + double.Parse(tx_boltedge_x_1.Text);
+                //plate 
 
-
-            double sum_2 = 0;
-            string[] spacing_X_array_2 = tx_boltSpacing_X_2.Text.Split(' ');
-            for (int i = 0; i < int.Parse(tx_bolt_X_No_2.Text) - 1; i++)
-            {
-                sum_2 = sum_2 + double.Parse(spacing_X_array_2[i]);
-            }
-            sum_2 = sum_2 + double.Parse(tx_boltedge_X_2.Text) + double.Parse(tx_boltengde1_x_2.Text);
-
-
-            //plate 
-
-            double plateLength_Z = sum_1;
-            double plateLength_Y = sum_2;
             double plateWidth = double.Parse(tx_polybeamWidth.Text);
             double platethick = double.Parse(tx_polybeamThik.Text);
             string polyBeam_material = tx_polybeamMaterial.Text;
@@ -91,11 +71,11 @@ namespace Angle_Connection_plugin
 
 
 
-            double l1 = double.Parse(tx_stiffnerL1.Text);
-            double l2 = double.Parse(tx_stiffnerL2.Text);
+            double l11 = double.Parse(tx_stiffnerL1.Text);
+            double l22 = double.Parse(tx_stiffnerL2.Text);
             double h1 = double.Parse(tx_stiffnerH1.Text);
             double h2 = double.Parse(tx_stiffnerH2.Text);
-
+            double l1=0, l2=0;
             double stiff_chanfer_x = double.Parse(tx_stffnerChanferX.Text);
             double stiff_chanfer_y = double.Parse(tx_stffnerChanferY.Text);
 
@@ -198,6 +178,38 @@ namespace Angle_Connection_plugin
             double bolt_shift_2 = double.Parse(tx_bolt_shift_2.Text);
 
 
+            double sum_1 = 0, sum_2 = 0;
+            #region parameter
+            List<double> Sx_main = listspacing(X_spacing_main, NO_ofBolts_X_main);
+            List<double> Sy_main = listspacing(Y_spacing_main, NO_ofBolts_Y_main);
+            List<double> Sx_sec = listspacing(X_spacing_sec, NO_ofBolts_X_sec);
+            List<double> Sy_sec = listspacing(Y_spacing_sec, NO_ofBolts_Y_sec);
+
+            if (NO_ofBolts_X_main > 1)
+            {
+                sum_1 = Sx_main.Sum() + boltEdge2_x_1 + dx_Boltedge_main;
+
+            }
+            else
+            {
+                sum_1 =boltEdge2_x_1 + dx_Boltedge_main;
+
+            }
+
+            if (NO_ofBolts_X_sec > 1)
+            {
+                sum_2 = Sx_sec.Sum() + dx_Boltedge_sec + boltEdge2_x_2;
+
+
+            }
+            else
+            {
+                sum_2 = dx_Boltedge_sec + boltEdge2_x_2;
+
+            }
+
+            double plateLength_Z = sum_1;
+            double plateLength_Y = sum_2;
             #endregion
             // pick 2 parts main and secandy part
             Part mainPart = new Picker().PickObject(Picker.PickObjectEnum.PICK_ONE_PART) as Part;
@@ -245,7 +257,6 @@ namespace Angle_Connection_plugin
                     t3d.Point point1_max = transformationPlane.TransformationMatrixToGlobal.Transform(MaxSecndaryPoint);
                     t3d.Point point2_min = transformationPlane.TransformationMatrixToGlobal.Transform(MinSecndaryPoint);
 
-                    t3d.Point MidSecndaryPoint = getmidpoint(point1CenterSecndary, point2CenterSecendary);
                     //  double z_Point = MaxSecndaryPoint.Z;
                     double z_dirFactor = 1;
 
@@ -280,6 +291,11 @@ namespace Angle_Connection_plugin
 
                         }
                     }
+                    //new 
+                    GeometricPlane mainPartPlaneTogetPoint = new GeometricPlane(point1CenterMain, mainPart.GetCoordinateSystem().AxisX, mainPart.GetCoordinateSystem().AxisX.Cross( mainPart.GetCoordinateSystem().AxisY));
+                    LineSegment line11 = new LineSegment(point1CenterSecndary, point2CenterSecendary);
+
+                    t3d.Point MidSecndaryPoint   =    Intersection.LineSegmentToPlane(line11, mainPartPlaneTogetPoint);
 
                     double x_Point = MidSecndaryPoint.X + Connection_shift;
                     double y_Point = MidSecndaryPoint.Y;
@@ -328,12 +344,33 @@ namespace Angle_Connection_plugin
                     //check_with_beam(plateMidPoint, platePoint3);
 
                     // stiffner points
-                    t3d.Point stiffnerPoint0 = new t3d.Point(plateMidPoint.X, plateMidPoint.Y + platethick * factor, plateMidPoint.Z + platethick * z_dirFactor);
-                    t3d.Point stiffnerPoint1 = Intersection.LineSegmentToPlane(lineStiffner, mainPartPlane);
-                    stiffnerPoint1 = new t3d.Point(stiffnerPoint1.X, stiffnerPoint1.Y + platethick * factor, stiffnerPoint1.Z + platethick * z_dirFactor);
+
+
+
+                    Vector plate_vector1 = new Vector(platePoint1 - plateMidPoint);
+                    Vector plate_vector2 = new Vector(platePoint3 - plateMidPoint);
+                  double length1=  Distance.PointToPoint(platePoint1 , plateMidPoint)- platethick;
+                  double length2 = Distance.PointToPoint(platePoint3 , plateMidPoint)- platethick;
+                    l1 = length1 - l11;
+                    l2 = length2 - l22;
+                    plate_vector1.Normalize();
+                    plate_vector2.Normalize();
+                    t3d.Point stiffnerPoint0 = platePoint1 - plate_vector1 * length1;
+                    stiffnerPoint0 = stiffnerPoint0 + plate_vector2 * platethick;
+
+
+                  //  check_with_beam(stiffnerPoint0, platePoint3);
+                    t3d.Point stiffnerPoint1 = stiffnerPoint0+plate_vector1 * l1;
+                    t3d.Point stiffnerPoint4 = stiffnerPoint0+ plate_vector2 * l2;
+
+
+
+                  //  t3d.Point stiffnerPoint0 = new t3d.Point(plateMidPoint.X, plateMidPoint.Y + platethick * factor, plateMidPoint.Z + platethick * z_dirFactor);
+                  //  t3d.Point stiffnerPoint1 = Intersection.LineSegmentToPlane(lineStiffner, mainPartPlane);
+                 //   stiffnerPoint1 = new t3d.Point(stiffnerPoint1.X, stiffnerPoint1.Y + platethick * factor, stiffnerPoint1.Z + platethick * z_dirFactor);
                     t3d.Point stiffnerPoint2 = new t3d.Point(stiffnerPoint1.X, stiffnerPoint1.Y + h2 * factor, stiffnerPoint1.Z);
                     t3d.Point stiffnerPoint3 = new t3d.Point(plateMidPoint.X, plateMidPoint.Y + (platethick + l1) * factor, plateMidPoint.Z + platethick * z_dirFactor + h1 * z_dirFactor);
-                    t3d.Point stiffnerPoint4 = new t3d.Point(plateMidPoint.X, plateMidPoint.Y + (platethick + l1) * factor, plateMidPoint.Z + platethick * z_dirFactor);
+                 //   t3d.Point stiffnerPoint4 = new t3d.Point(plateMidPoint.X, plateMidPoint.Y + (platethick + l1) * factor, plateMidPoint.Z + platethick * z_dirFactor);
 
 
                     //trancfer points to plate plane
@@ -453,7 +490,7 @@ namespace Angle_Connection_plugin
 
                         BoltArray boltWithMain = InsertBolt(platePoint1, plateMidPoint, mainPart, plate, dx_Boltedge_main, boltSize_main,
                             tolerance_main, boltStandard_main, NO_ofBolts_X_main, NO_ofBolts_Y_main, X_spacing_main, Y_spacing_main
-                            , boltType_1, slotMainPart_1, slotSecPart_1, slotX_1, slotY_1, washer2_1, nut2_1, bolt_shift_1
+                            , boltType_1, slotMainPart_1, slotSecPart_1, slotX_1, slotY_1, washer2_1, nut2_1, bolt_shift_1,Sx_main,Sy_main
 );
                     }
                     else
@@ -467,7 +504,7 @@ namespace Angle_Connection_plugin
 
                         BoltArray boltWithSec = InsertBolt(platePoint3, plateMidPoint, secendaryPart, plate, dx_Boltedge_sec, boltSize_sec,
                             tolerance_sec, boltStandard_sec, NO_ofBolts_X_sec, NO_ofBolts_Y_sec, X_spacing_sec, Y_spacing_sec
-                            , boltType_2, slotMainPart_2, slotSecPart_2, slotX_2, slotY_2, washer2_2, nut2_2, bolt_shift_2
+                            , boltType_2, slotMainPart_2, slotSecPart_2, slotX_2, slotY_2, washer2_2, nut2_2, bolt_shift_2,Sx_sec,Sy_sec
             );
                     }
                     else
@@ -588,7 +625,7 @@ namespace Angle_Connection_plugin
             myModel.GetWorkPlaneHandler().SetCurrentTransformationPlane(currentPlan);
             myModel.CommitChanges();
         }
-        private void createBevel(Part cuttedpart, t3d.Point p1, t3d.Point p2, t3d.Point p3, string profile)
+            public void createBevel(Part cuttedpart, t3d.Point p1, t3d.Point p2, t3d.Point p3, string profile)
         {
             ContourPlate contourPlate = new ContourPlate();
             contourPlate.Class = BooleanPart.BooleanOperativeClassName;
@@ -613,7 +650,7 @@ namespace Angle_Connection_plugin
                 contourPlate.Delete();
             }
         }
-        public t3d.Point getmidpoint(t3d.Point p1, t3d.Point p2)
+            public t3d.Point getmidpoint(t3d.Point p1, t3d.Point p2)
         {
             double dis = t3d.Distance.PointToPoint(p1, p2);
             t3d.Vector vec = new t3d.Vector(p2 - p1); vec.Normalize();
@@ -797,58 +834,129 @@ namespace Angle_Connection_plugin
             return plate;
         }
 
-        private BoltArray InsertBolt(Point platePoint1, Point plateMidPoint, Part mainPart, Part plate, double dx, double boltSize,
-            double tolerance, string boltStandard, int no_bolt_x, int no_bolt_y, string spacing_x, string spacing_y,
-              BoltArray.BoltTypeEnum boltType, bool sloyInMainPart, bool sloyInSecnPart, double slot_X, double slot_y, bool Washer2, bool nut2
-           , double shift)
-        {
-
-            BoltArray boltArray = new BoltArray();
-            boltArray.FirstPosition = plateMidPoint;
-            boltArray.SecondPosition = platePoint1;
-            boltArray.PartToBeBolted = plate;
-            boltArray.PartToBoltTo = mainPart;
-
-            string[] spacing_X_array = spacing_x.Split(' ');
-            string[] spacing_Y_array = spacing_y.Split(' ');
-            for (int i = 0; i < no_bolt_x - 1; i++)
+            private BoltArray InsertBolt(Point platePoint1, Point plateMidPoint, Part mainPart, Part plate, double dx, double boltSize,
+               double tolerance, string boltStandard, int no_bolt_x, int no_bolt_y, string spacing_x, string spacing_y,
+                 BoltArray.BoltTypeEnum boltType, bool sloyInMainPart, bool sloyInSecnPart, double slot_X, double slot_y, bool Washer2, bool nut2
+              , double shift, List<double> Sx, List<double> Sy)
             {
-                boltArray.AddBoltDistX(double.Parse(spacing_X_array[i]));
 
+
+
+                BoltArray boltArray = new BoltArray();
+                boltArray.FirstPosition = plateMidPoint;
+                boltArray.SecondPosition = platePoint1;
+                boltArray.PartToBeBolted = plate;
+                boltArray.PartToBoltTo = mainPart;
+
+                string[] spacing_X_array = spacing_x.Split(' ');
+                string[] spacing_Y_array = spacing_y.Split(' ');
+
+
+                if (no_bolt_x > 1)
+                {
+                    for (int i = 0; i < no_bolt_x - 1; i++)
+                    {
+                        boltArray.AddBoltDistX(Sx[i]);
+                    }
+                }
+                else
+                {
+                    boltArray.AddBoltDistX(0);
+
+                }
+
+                if (no_bolt_y > 1)
+                {
+                    for (int i = 0; i < no_bolt_y - 1; i++)
+                    {
+                        boltArray.AddBoltDistY(Sy[i]);
+                    }
+                }
+                else
+                {
+                    boltArray.AddBoltDistY(0);
+
+                }
+                //for (int i = 0; i < no_bolt_x - 1; i++)
+                //{
+                //    boltArray.AddBoltDistX(double.Parse(spacing_X_array[i]));
+
+                //}
+                //for (int i = 0; i < no_bolt_y - 1; i++)
+                //{
+                //    boltArray.AddBoltDistY(double.Parse(spacing_Y_array[i]));
+
+                //}
+                boltArray.StartPointOffset.Dx = dx;
+
+                boltArray.BoltSize = boltSize;
+                boltArray.Tolerance = tolerance;
+                boltArray.BoltStandard = boltStandard;
+                boltArray.Position.Rotation = Position.RotationEnum.TOP;
+
+                boltArray.BoltType = boltType;
+                boltArray.Hole1 = sloyInMainPart;
+                boltArray.Hole2 = sloyInSecnPart;
+                boltArray.SlottedHoleX = slot_X;
+                boltArray.SlottedHoleY = slot_y;
+                boltArray.Washer2 = Washer2;
+                boltArray.Nut2 = nut2;
+
+
+                boltArray.Washer1 = true;
+                boltArray.Nut1 = true;
+                boltArray.HoleType = BoltGroup.BoltHoleTypeEnum.HOLE_TYPE_SLOTTED;
+
+                boltArray.StartPointOffset.Dz = shift;
+                boltArray.EndPointOffset.Dz = shift;
+                boltArray.Insert();
+                return boltArray;
             }
-            for (int i = 0; i < no_bolt_y - 1; i++)
+            private List<double> listspacing(string spacings, int N)
             {
-                boltArray.AddBoltDistY(double.Parse(spacing_Y_array[i]));
+                List<double> spacing = new List<double>();
+                if (N != 1)
+                {
+                    if (spacings.Contains(" ") || spacings.Contains("*"))
+                    {
+                        string[] array = spacings.Split(' ');
+                        for (int i = 0; i < array.Length; i++)
+                        {
+                            string text = array[i];
+                            if (!text.Contains('*'))
+                            {
+                                spacing.Add(Convert.ToDouble(text));
+                            }
+                            if (text.Contains('*'))
+                            {
+                                string[] array2 = text.Split('*');
+                                int num = int.Parse(array2[0]);
+                                for (int j = 0; j < num; j++)
+                                {
+                                    spacing.Add(Convert.ToDouble(array2[1]));
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < N - 1; i++)
+                        {
+                            spacing.Add(Convert.ToDouble(spacings));
+                        }
+                    }
+                }
+                else
+                {
+                    spacing.Add(Convert.ToDouble(spacings));
+                }
 
+                return spacing;
             }
-            boltArray.StartPointOffset.Dx = dx;
-
-            boltArray.BoltSize = boltSize;
-            boltArray.Tolerance = tolerance;
-            boltArray.BoltStandard = boltStandard;
-            boltArray.Position.Rotation = Position.RotationEnum.TOP;
-
-            boltArray.BoltType = boltType;
-            boltArray.Hole1 = sloyInMainPart;
-            boltArray.Hole2 = sloyInSecnPart;
-            boltArray.SlottedHoleX = slot_X;
-            boltArray.SlottedHoleY = slot_y;
-            boltArray.Washer2 = Washer2;
-            boltArray.Nut2 = nut2;
 
 
-            boltArray.Washer1 = true;
-            boltArray.Nut1 = true;
-            boltArray.HoleType = BoltGroup.BoltHoleTypeEnum.HOLE_TYPE_SLOTTED;
 
-            boltArray.StartPointOffset.Dz = shift;
-            boltArray.EndPointOffset.Dz = shift;
-            boltArray.Insert();
-            return boltArray;
-        }
-
-
-        public Weld insert_weld_allaround(Part Main_part, Part Secandary_part, double below)
+            public Weld insert_weld_allaround(Part Main_part, Part Secandary_part, double below)
         {
             Weld weld = new Weld();
             weld.MainObject = Main_part;
