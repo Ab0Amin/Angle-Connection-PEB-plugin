@@ -254,16 +254,21 @@ namespace Angle_Connection_plugin
                     t3d.Point MaxSecndaryPoint = secSolid.MaximumPoint;
                     t3d.Point MinSecndaryPoint = secSolid.MinimumPoint;
 
-                    t3d.Point point1_max = transformationPlane.TransformationMatrixToGlobal.Transform(MaxSecndaryPoint);
-                    t3d.Point point2_min = transformationPlane.TransformationMatrixToGlobal.Transform(MinSecndaryPoint);
-
+                  
+                   // check_with_beam(MaxSecndaryPoint, MinSecndaryPoint);
                     //  double z_Point = MaxSecndaryPoint.Z;
                     double z_dirFactor = 1;
 
+
+                   t3d.Point midBetMax_Min =  getmidpoint(MaxSecndaryPoint, MinSecndaryPoint);
+                    t3d.Point point1_max = new t3d.Point(midBetMax_Min.X, midBetMax_Min.Y, midBetMax_Min.Z + 1000);
+                        t3d.Point point2_min = new t3d.Point(midBetMax_Min.X, midBetMax_Min.Y, midBetMax_Min.Z - 1000);
+                    point1_max = transformationPlane.TransformationMatrixToGlobal.Transform(point1_max);
+                    point2_min = transformationPlane.TransformationMatrixToGlobal.Transform(point2_min);
                     if (direction == 0)
                     {
 
-                        cb_location.SelectedIndex = 0;
+                       // cb_location.SelectedIndex = 0;
                         if (point1_max.Z > point2_min.Z)
                         {
                             // z_Point = MaxSecndaryPoint.Z;
@@ -278,7 +283,7 @@ namespace Angle_Connection_plugin
                     }
                     else if (direction == 1)
                     {
-                        cb_location.SelectedIndex = 1;
+                     //   cb_location.SelectedIndex = 1;
                         if (point1_max.Z < point2_min.Z)
                         {
                             //    z_Point = MaxSecndaryPoint.Z;
@@ -971,10 +976,14 @@ namespace Angle_Connection_plugin
             weld.Insert();
             return weld;
         }
+
+
         private void textBox25_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+
         public int BeamDirection(Part part)
         {
             //  part = new Picker().PickObject(Picker.PickObjectEnum.PICK_ONE_PART) as Part;
@@ -1009,9 +1018,11 @@ namespace Angle_Connection_plugin
 
             t3d.Point point_1 = points1[0] as t3d.Point;
             t3d.Point point_2 = points2[0] as t3d.Point;
+            check_with_beam(point_2, point_1);
             point_1 = transformationPlane.TransformationMatrixToGlobal.Transform(point_1);
             point_2 = transformationPlane.TransformationMatrixToGlobal.Transform(point_2);
             int direction = 0;
+         /// 0 refer to +z global and 1 to -z global
             if (points1.Count < points2.Count)
             {
                 if (point_1.Z > point_2.Z)
